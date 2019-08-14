@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/HZ_Reminder",
+    "type": "magento-module",
+    "license": "OSL-3.0",
+    "homepage": "",
+    "description": "Reminder Extension",
+    "authors": [
+    {
+        "name": "Mohammad Harun-Or-Rashid",
+        "email": "harun.zend@gmail.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

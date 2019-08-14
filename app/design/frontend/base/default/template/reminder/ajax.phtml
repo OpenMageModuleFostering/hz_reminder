@@ -1,0 +1,122 @@
+<script type="text/javascript">
+    //Ajax Form Submit
+    jQuery("#remainderAjaxForm").submit(function(event){
+        event.preventDefault();
+
+        var parent_this = jQuery(this);
+
+         var individual_form_data = jQuery(this).serialize();
+         var form_action = jQuery(this).attr('action');
+
+         jQuery.ajax( {
+             type : "POST",
+             url : form_action,
+             data : individual_form_data,
+             success : function(msg) {
+                 if(Number(msg) == 1){
+                     var successHtml = '<p>Your reminder was submitted successfully.</p>';
+                     jQuery("#reminder-ajax-form-body").html(successHtml);
+                 }
+                 else{
+                     var errorHtml = '<p>Unable to submit your request. Please, try again later.</p>';
+                     jQuery("#reminder-ajax-form-body").html(errorHtml);
+                 }
+             }
+         });
+
+    });
+</script>
+<style type="text/css">
+    #advice-validate-select-reminder_day {
+        display: none;
+    }
+    #advice-validate-select-reminder_month {
+        display: none;
+    }
+</style>
+<div id="reminder-ajax-form-container" style="padding: 20px 20px 20px 20px">
+    <div class="page-title">
+        <h1><?php echo Mage::helper('reminder')->__('Remainder') ?></h1>
+    </div>
+    <div id="reminder-ajax-form-body">
+        <form action="<?php echo $this->getUrl('reminder/index/ajaxPost/') ?>" id="remainderAjaxForm" method="post">
+            <div class="fieldset">
+                <ul class="form-list">
+                    <li class="wide">
+                        <label for="name" class="required"><em>*</em><?php echo Mage::helper('reminder')->__('Name') ?></label>
+                        <div class="input-box">
+                            <input name="title" id="title" title="<?php echo Mage::helper('reminder')->__('Name') ?>" class="input-text required-entry" type="text" />
+                        </div>
+                    </li>
+                    <li class="wide">
+                        <label for="email" class="required"><em>*</em><?php echo Mage::helper('reminder')->__('Email') ?></label>
+                        <div class="input-box">
+                            <input name="email" id="email" title="<?php echo Mage::helper('reminder')->__('Email') ?>" class="input-text required-entry validate-email" type="text" />
+                        </div>
+                    </li>
+                    <li class="wide">
+                        <label for="product_name" class="required"><em>*</em><?php echo Mage::helper('reminder')->__('Product Name') ?></label>
+                        <div class="input-box">
+                            <input name="product_name" id="product_name" title="<?php echo Mage::helper('reminder')->__('Product Name') ?>" value="<?php echo Mage::registry('product_name'); ?>"  class="input-text required-entry" type="text" />
+                        </div>
+                    </li>
+
+                    <li class="wide">
+                        <label for="reminder_date" class="required"><em>*</em><?php echo Mage::helper('reminder')->__('Remainder Date') ?></label>
+                        <div class="input-box">
+                            <select name="reminder_day" id="reminder_day" class="validate-select" style="width:100px !important;">
+                                <option value=''>Day</option>
+                            <?php
+                            for($i = 1; $i <= 31; $i++)
+                            {
+                                $day = sprintf("%02d", $i);
+                                echo "<option value='".$day."'>".$day."</option>";
+                            }
+                            ?>
+                            </select>
+
+                            <select name="reminder_month" class="validate-select" id="reminder_month" style="width:120px !important;">
+                                <option value=''>Month</option>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+
+                            <select name="reminder_year" class="validate-select" id="reminder_year" style="width:100px !important;">
+                                <option value=''>Year</option>
+                                <?php
+                                for($j = date('Y'); $j <= date('Y') + 10; $j++)
+                                {
+                                    echo "<option value='".$j."'>".$j."</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="buttons-set">
+                <input type="hidden" name="product_sku" value="<?php echo Mage::registry('product_sku'); ?>"/>
+                <input type="hidden" name="product_url" value="<?php echo Mage::registry('product_url'); ?>"/>
+                <p class="required"><?php echo Mage::helper('reminder')->__('* Required Fields') ?></p>
+                <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+                <button type="submit" title="<?php echo Mage::helper('reminder')->__('Submit') ?>" class="button"><span><span><?php echo Mage::helper('reminder')->__('Submit') ?></span></span></button>
+            </div>
+        </form>
+        <script type="text/javascript">
+            //<![CDATA[
+            var remainderForm = new VarienForm('remainderAjaxForm', true);
+            //]]>
+        </script>
+    </div>
+</div>
+

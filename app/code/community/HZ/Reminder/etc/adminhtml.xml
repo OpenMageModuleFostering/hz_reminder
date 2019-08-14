@@ -1,0 +1,52 @@
+<config>
+    <menu>
+        <reminder module="reminder">
+            <title>Reminder</title>
+            <sort_order>71</sort_order>
+            <children>
+                <subscriber module="reminder">
+                    <title>Reminder Subscribers</title>
+                    <sort_order>0</sort_order>
+                    <action>reminder/adminhtml_reminder</action>
+                </subscriber>
+                <mail module="reminder">
+                    <title>Send Reminder</title>
+                    <sort_order>1</sort_order>
+                    <action>reminder/adminhtml_mail</action>
+                </mail>
+                <report module="reminder">
+                    <title>Reminder Report</title>
+                    <sort_order>2</sort_order>
+                    <action>reminder/adminhtml_report</action>
+                </report>
+            </children>
+        </reminder>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <HZ_Reminder>
+                        <title>Reminder Module</title>
+                        <sort_order>10</sort_order>
+                    </HZ_Reminder>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <reminder translate="title" module="reminder">
+                                        <title>Reminder</title>
+                                        <sort_order>800</sort_order>
+                                    </reminder>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

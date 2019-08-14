@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <reminder_adminhtml_reminder_edit>
+		<update handle="editor"/>
+    </reminder_adminhtml_reminder_edit>
+    <reminder_adminhtml_reminder_index>
+		<update handle="editor"/>
+        <reference name="content">
+            <block type="reminder/adminhtml_reminder" name="reminder" />
+        </reference>
+    </reminder_adminhtml_reminder_index>
+    <reminder_adminhtml_report_index>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="reminder/adminhtml_report" name="report" />
+        </reference>
+    </reminder_adminhtml_report_index>
+</layout>
